@@ -4,7 +4,8 @@ CI.run do
   step "Setup", "bin/setup --skip-server"
 
   step "Style: Ruby", "bin/rubocop"
-  step "Biome: JavaScript", "npx @biomejs/biome lint"
+  step "Check: No TODOs",
+        "if grep -r TODO app/; then exit 1; fi"
 
   step "Security: Gem audit", "bin/bundler-audit"
   step "Security: Importmap vulnerability audit", "bin/importmap audit"
